@@ -1,0 +1,12 @@
+body {
+    background-color: #E5E5E5;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+}
+
+.logo img {
+    width: 21%;
+}
