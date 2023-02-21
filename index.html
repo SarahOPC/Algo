@@ -9,41 +9,43 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="./data/recipes.js"></script>
-<script src="./scripts/factories/recipesFactory.js"></script>
-<script src="./scripts/pages/index.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="logo">
-                    <img src="./assets/images/logoLesPetitsPlats.jpg" alt="logoLesPetitsPlats" aria-label="logoLesPetitsPlats">
-                </div>
-                <div class="container search">
-                    <label for="search"></label>
-                    <input type="search" id="search" name="search" placeholder="Rechercher une recette" aria-placeholder="Look for a recipe">
-                    <i class="fa fa-search"></i>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="logo">
+                        <img src="./assets/images/logoLesPetitsPlats.jpg" alt="logoLesPetitsPlats" aria-label="logoLesPetitsPlats">
+                    </div>
+                    <div class="container search">
+                        <label for="search"></label>
+                        <input type="search" id="search" name="search" placeholder="Rechercher une recette" aria-placeholder="Look for a recipe">
+                        <i class="fa fa-search"></i>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container filters">
-        <div class="row gap-4 ms-5">
-            <div class="col-3 rounded-2 p-4 ingredients">
-                <p class="m-0">Ingrédients</p>
-            </div>
-            
-            <div class="col-3 rounded-2 p-4 appliance">
-                <p class="m-0">Appareils</p>
-            </div>
-
-            <div class="col-3 rounded-2 p-4 ustensils">
-                <p class="m-0">Ustensiles</p>
+        <div class="container filters">
+            <div class="row gap-4 ms-5">
+                <div class="col-3 rounded-2 p-4 ingredients">
+                    <p class="m-0">Ingrédients</p>
+                </div>
+                
+                <div class="col-3 rounded-2 p-4 appliance">
+                    <p class="m-0">Appareils</p>
+                </div>
+                
+                <div class="col-3 rounded-2 p-4 ustensils">
+                    <p class="m-0">Ustensiles</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container recipeSection">
-    </div>
+        <div class="container recipeSection">
+        </div>
+    </main>
+    <script src="./data/recipes.js"></script>
+    <script src="./scripts/factories/recipesFactory.js"></script>
+    <script src="./scripts/pages/index.js"></script>
 </body>
 </html>
