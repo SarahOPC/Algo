@@ -1,5 +1,5 @@
 function recipesFactory(data) {
-    const { name, time, ingredient, quantity, description} = data;
+    const { name, time, ingredient, quantity, unit, description} = data;
         
     function createDOM() {
         const divCardContainer = document.createElement( 'div' );
@@ -10,7 +10,7 @@ function recipesFactory(data) {
         divCard.setAttribute("class", "card");
         const greyImg = document.createElement( 'img' );
         greyImg.setAttribute("class", "card-img-top");
-        greyImg.setAttribute("src", "../../assets/images/greyImg.jpg");
+        greyImg.setAttribute("src", "./assets/images/greyImg.jpg");
         const divCardBody = document.createElement( 'div' );
         divCardBody.setAttribute("class", "card-body");
         const h5CardTitle = document.createElement( 'h5' );
@@ -22,7 +22,7 @@ function recipesFactory(data) {
         divCardTextRow.setAttribute("class", "row");
         const divCardTextIngredients = document.createElement( 'div' );
         divCardTextIngredients.setAttribute("class", "col-6 gap-3");
-        divCardTextIngredients.textContent = ingredient + " " + quantity;
+        divCardTextIngredients.textContent = ingredient + " " + quantity + " " + unit;
         const divCardTextInstructions = document.createElement( 'div' );
         divCardTextInstructions.setAttribute("class", "col-6 gap-3");
         divCardTextInstructions.textContent = description;
@@ -37,5 +37,5 @@ function recipesFactory(data) {
         divCardContainer.appendChild(divCardGroup);
         return divCardContainer;
     }
-    return { name, time, ingredient, quantity, description, createDOM }
+    return { createDOM }
 }
