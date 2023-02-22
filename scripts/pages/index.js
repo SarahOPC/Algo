@@ -2,14 +2,24 @@ async function getRecipes() {
     let recipesArray = recipes;
 
     let recipeData = [];
+    let ingredients = [];
     for(let i = 0; i < recipesArray.length; i ++) {
+        for(let j = 0; j < recipesArray[i].ingredients.length; j ++) {
+            let ingredientsRecipe = 
+            {
+                ingredients: recipesArray[i].ingredients[j].ingredient,
+                quantity: recipesArray[i].ingredients[j].quantity,
+                unit:recipesArray[i].ingredients[j].unit,
+            }
+            ingredients.push(ingredientsRecipe);
+        }
+
         let recipe =
         {
-            name: recipesArray[i].name,
-            time: recipesArray[i].time,
-            ingredients: recipesArray[i].ingredients.ingredient,
-            quantity: recipesArray[i].ingredients.quantity,
-            description: recipesArray[i].description
+        name: recipesArray[i].name,
+        time: recipesArray[i].time,
+        description: recipesArray[i].description,
+        ingredients: recipesArray[i].ingredients
         }
         recipeData.push(recipe);
     }
