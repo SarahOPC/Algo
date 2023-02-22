@@ -4,15 +4,14 @@ function recipesFactory(data) {
         const divCardContainer = document.createElement( 'div' );
         divCardContainer.setAttribute("class", "container");
         for(let i = 0; i < data.length; i ++) {
-            const divCardGroup = document.createElement( 'div' );
-            divCardGroup.setAttribute("class", "card-group");
             const divCard = document.createElement( 'div' );
-            divCard.setAttribute("class", "card");
+            divCard.setAttribute("class", "card mh-100");
+            divCard.setAttribute("style", "width: 25em; height: 41em;");
             const greyImg = document.createElement( 'img' );
             greyImg.setAttribute("class", "card-img-top");
-            greyImg.setAttribute("src", "./assets/images/greyImg.jpg");
+            greyImg.setAttribute("src", "./assets/images/greyImg.jpg ");
             const divCardBody = document.createElement( 'div' );
-            divCardBody.setAttribute("class", "card-body");
+            divCardBody.setAttribute("class", "card-body scrollable");
             const h5CardTitle = document.createElement( 'h5' );
             h5CardTitle.setAttribute("class", "card-title");
             h5CardTitle.textContent = data[i].name + " " + data[i].time;
@@ -22,6 +21,7 @@ function recipesFactory(data) {
             divCardTextRow.setAttribute("class", "row");
             const divCardTextIngredients = document.createElement( 'div' );
             divCardTextIngredients.setAttribute("class", "col-6 gap-3");
+
             for(let j = 0; j < data[i].ingredients.length; j ++) {
                 if(data[i].ingredients[j].quantity == undefined) {
                     const pIngredients = document.createElement( 'p' );
@@ -37,6 +37,7 @@ function recipesFactory(data) {
                     divCardTextIngredients.appendChild(pIngredients);
                 }
             }
+            
                 const divCardTextInstructions = document.createElement( 'div' );
                 divCardTextInstructions.setAttribute("class", "col-6 gap-3");
                 divCardTextInstructions.textContent = data[i].description;
@@ -47,8 +48,7 @@ function recipesFactory(data) {
                 divCardBody.appendChild(divCardText);
                 divCard.appendChild(greyImg);
                 divCard.appendChild(divCardBody);
-                divCardGroup.appendChild(divCard);
-                divCardContainer.appendChild(divCardGroup);
+                divCardContainer.appendChild(divCard);
         }
         return divCardContainer;
     }

@@ -47,3 +47,8 @@
 .filters {
     margin-left: 5%;
 }
+
+.scrollable {
+    overflow-y: auto;
+    max-height: 41em;
+}
