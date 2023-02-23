@@ -14,7 +14,7 @@ function recipesFactory(data) {
             divCardBody.setAttribute("class", "card-body scrollable");
             const divCardTitle = document.createElement( 'div' );
             divCardTitle.setAttribute("class", "card-title d-flex justify-content-between align-items-baseline");
-            const h5CardTitle = document.createElement( 'h5' );
+            const h6CardTitle = document.createElement( 'h6' );
             const divTime = document.createElement( 'div' );
             divTime.setAttribute("class", "divTime d-flex align-items-baseline");
             const clock = document.createElement( 'i' );
@@ -24,8 +24,8 @@ function recipesFactory(data) {
             clock.setAttribute("class", "fa fa-clock-o");
             divTime.appendChild(clock);
             divTime.appendChild(divPTime);
-            h5CardTitle.textContent = data[i].name;
-            divCardTitle.appendChild(h5CardTitle);
+            h6CardTitle.textContent = data[i].name;
+            divCardTitle.appendChild(h6CardTitle);
             divCardTitle.appendChild(divTime);
             const divCardText = document.createElement( 'div' );
             divCardText.setAttribute("class", "card-text");

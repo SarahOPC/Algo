@@ -52,3 +52,7 @@
     overflow-y: auto;
     max-height: 41em;
 }
+
+.divPTime {
+    font-size: 90%;
+}
