@@ -2,19 +2,31 @@ function recipesFactory(data) {
             
     function createDOM() {
         const divCardContainer = document.createElement( 'div' );
-        divCardContainer.setAttribute("class", "container");
+        divCardContainer.setAttribute("class", "container d-flex flex-wrap gap-5 justify-content-between");
         for(let i = 0; i < data.length; i ++) {
             const divCard = document.createElement( 'div' );
-            divCard.setAttribute("class", "card mh-100");
-            divCard.setAttribute("style", "width: 25em; height: 41em;");
+            divCard.setAttribute("class", "card");
+            divCard.setAttribute("style", "width: 24.5em; height: 37em;");
             const greyImg = document.createElement( 'img' );
             greyImg.setAttribute("class", "card-img-top");
             greyImg.setAttribute("src", "./assets/images/greyImg.jpg ");
             const divCardBody = document.createElement( 'div' );
             divCardBody.setAttribute("class", "card-body scrollable");
+            const divCardTitle = document.createElement( 'div' );
+            divCardTitle.setAttribute("class", "card-title d-flex justify-content-between align-items-baseline");
             const h5CardTitle = document.createElement( 'h5' );
-            h5CardTitle.setAttribute("class", "card-title");
-            h5CardTitle.textContent = data[i].name + " " + data[i].time;
+            const divTime = document.createElement( 'div' );
+            divTime.setAttribute("class", "divTime d-flex align-items-baseline");
+            const clock = document.createElement( 'i' );
+            const divPTime = document.createElement( 'div' );
+            divPTime.setAttribute("class", "divPTime p-1");
+            divPTime.textContent = " " + data[i].time + " min";
+            clock.setAttribute("class", "fa fa-clock-o");
+            divTime.appendChild(clock);
+            divTime.appendChild(divPTime);
+            h5CardTitle.textContent = data[i].name;
+            divCardTitle.appendChild(h5CardTitle);
+            divCardTitle.appendChild(divTime);
             const divCardText = document.createElement( 'div' );
             divCardText.setAttribute("class", "card-text");
             const divCardTextRow = document.createElement( 'div' );
@@ -44,7 +56,7 @@ function recipesFactory(data) {
                 divCardTextRow.appendChild(divCardTextIngredients);
                 divCardTextRow.appendChild(divCardTextInstructions);
                 divCardText.appendChild(divCardTextRow);
-                divCardBody.appendChild(h5CardTitle);
+                divCardBody.appendChild(divCardTitle);
                 divCardBody.appendChild(divCardText);
                 divCard.appendChild(greyImg);
                 divCard.appendChild(divCardBody);
