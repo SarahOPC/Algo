@@ -30,18 +30,28 @@
     position: absolute;
     right: 3%;
     top: 63%;
+    font-size: 130%;
 }
 
-.ingredients {
+.ingredients, #ingredients {
     background-color: #3282F7;
+    border-color: #3282F7;
+    font-size: 120%;
+    color: #FFFFFF;
 }
 
-.appliance {
+.appliance, #appliance {
     background-color: #68D9A4;
+    border-color: #68D9A4;
+    font-size: 120%;
+    color: #FFFFFF;
 }
 
-.ustensils {
+.ustensils, #ustensils {
     background-color: #ED6454;
+    border-color: #ED6454;
+    font-size: 120%;
+    color: #FFFFFF;
 }
 
 .filters {
@@ -55,4 +65,9 @@
 
 .divPTime {
     font-size: 90%;
+}
+
+.m-0 {
+    color: black;
+    font-size: 110%;
 }

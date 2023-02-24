@@ -35,3 +35,69 @@ async function displayData() {
 }
 
 displayData();
+
+function retrieveIngredients() {
+    let ingredientsArray = [];
+    let recipesArray = recipes;
+    recipesArray.forEach(recipe => {
+        for(let i = 0; i < recipe.ingredients.length; i ++) {
+            ingredientsArray.push(recipe.ingredients[i].ingredient.toLowerCase());
+        }
+    })
+    let finalIngredientsArray = ingredientsArray.filter((item, index) => ingredientsArray.indexOf(item) === index);
+    return finalIngredientsArray;
+}
+
+function addOptionsToSelectIngredients() {
+    let ingredientsArray = retrieveIngredients();
+    const select = document.getElementById("ingredients");
+    for(index in ingredientsArray) {
+        select.options[select.options.length] = new Option(ingredientsArray[index], index);
+    }
+}
+
+function retrieveAppliance() {
+    let applianceArray = [];
+    let recipesArray = recipes;
+    recipesArray.forEach(recipe => {
+        applianceArray.push(recipe.appliance.toLowerCase());
+    })
+    let finalApplianceArray = applianceArray.filter((item, index) => applianceArray.indexOf(item) === index);
+    return finalApplianceArray;
+}
+
+function addOptionsToSelectAppliance() {
+    let applianceArray = retrieveAppliance();
+    const select = document.getElementById("appliance");
+    for(index in applianceArray) {
+        select.options[select.options.length] = new Option(applianceArray[index], index);
+    }
+}
+
+function retrieveUstensils() {
+    let ustensilsArray = [];
+    let recipesArray = recipes;
+    recipesArray.forEach(recipe => {
+        for(let i = 0; i < recipe.ustensils.length; i ++) {
+            ustensilsArray.push(recipe.ustensils[i].toLowerCase());
+        }
+    })
+    let finalUstensilsArray = ustensilsArray.filter((item, index) => ustensilsArray.indexOf(item) === index);
+    return finalUstensilsArray;
+}
+
+function addOptionsToSelectUstensils() {
+    let ustensilsArray = retrieveUstensils();
+    const select = document.getElementById("ustensils");
+    for(index in ustensilsArray) {
+        select.options[select.options.length] = new Option(ustensilsArray[index], index);
+    }
+}
+
+function retrieveTags() {
+    addOptionsToSelectIngredients();
+    addOptionsToSelectAppliance();
+    addOptionsToSelectUstensils();
+}
+
+retrieveTags();
