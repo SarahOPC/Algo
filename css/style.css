@@ -36,21 +36,19 @@
 .ingredients, #ingredients {
     background-color: #3282F7;
     border-color: #3282F7;
-    font-size: 120%;
     color: #FFFFFF;
+    width: auto;
 }
 
 .appliance, #appliance {
     background-color: #68D9A4;
     border-color: #68D9A4;
-    font-size: 120%;
     color: #FFFFFF;
 }
 
 .ustensils, #ustensils {
     background-color: #ED6454;
     border-color: #ED6454;
-    font-size: 120%;
     color: #FFFFFF;
 }
 
@@ -70,4 +68,10 @@
 .m-0 {
     color: black;
     font-size: 110%;
+}
+
+.col-2.rounded-2.ingredients.d-flex.align-items-baseline,
+.col-2.rounded-2.appliance.d-flex.align-items-baseline,
+.col-2.rounded-2.ustensils.d-flex.align-items-baseline {
+    box-sizing: content-box;
 }

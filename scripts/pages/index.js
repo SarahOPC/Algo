@@ -51,8 +51,15 @@ function retrieveIngredients() {
 function addOptionsToSelectIngredients() {
     let ingredientsArray = retrieveIngredients();
     const select = document.getElementById("ingredients");
+    let firstOption = new Option("Ingrédients", "");
+    firstOption.setAttribute("disabled", "");
+    firstOption.setAttribute("selected", "");
+    select.appendChild(firstOption, undefined);
     for(index in ingredientsArray) {
-        select.options[select.options.length] = new Option(ingredientsArray[index], index);
+        // New variable option wich stock new option from array
+        let option = new Option(ingredientsArray[index], index);
+        // then adding at the end of the list the option created
+        select.options[select.options.length] = option;
     }
 }
 
@@ -69,8 +76,15 @@ function retrieveAppliance() {
 function addOptionsToSelectAppliance() {
     let applianceArray = retrieveAppliance();
     const select = document.getElementById("appliance");
+    let firstOption = new Option("Appareils", "");
+    firstOption.setAttribute("disabled", "");
+    firstOption.setAttribute("selected", "");
+    select.appendChild(firstOption, undefined);
     for(index in applianceArray) {
-        select.options[select.options.length] = new Option(applianceArray[index], index);
+       // New variable option wich stock new option from array
+       let option = new Option(applianceArray[index], index);
+       // then adding at the end of the list the option created
+       select.options[select.options.length] = option;
     }
 }
 
@@ -89,8 +103,15 @@ function retrieveUstensils() {
 function addOptionsToSelectUstensils() {
     let ustensilsArray = retrieveUstensils();
     const select = document.getElementById("ustensils");
+    let firstOption = new Option("Ustensiles", "");
+    firstOption.setAttribute("disabled", "");
+    firstOption.setAttribute("selected", "");
+    select.appendChild(firstOption, undefined);
     for(index in ustensilsArray) {
-        select.options[select.options.length] = new Option(ustensilsArray[index], index);
+            // New variable option wich stock new option from array
+            let option = new Option(ustensilsArray[index], index);
+            // then adding at the end of the list the option created
+            select.options[select.options.length] = option;    
     }
 }
 
