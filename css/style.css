@@ -37,7 +37,6 @@
     background-color: #3282F7;
     border-color: #3282F7;
     color: #FFFFFF;
-    width: auto;
 }
 
 .appliance, #appliance {
@@ -50,6 +49,10 @@
     background-color: #ED6454;
     border-color: #ED6454;
     color: #FFFFFF;
+}
+
+#ingredients, #appliance, #ustensils {
+    width: 100%;
 }
 
 .filters {
