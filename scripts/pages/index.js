@@ -35,90 +35,93 @@ async function displayData() {
 }
 
 displayData();
+retrieveTags();
 
-function retrieveIngredients() {
-    let ingredientsArray = [];
-    let recipesArray = recipes;
-    recipesArray.forEach(recipe => {
-        for(let i = 0; i < recipe.ingredients.length; i ++) {
-            ingredientsArray.push(recipe.ingredients[i].ingredient.toLowerCase());
+function retrieveElements(element, itemArray, finalItemArray) {
+    let itemArray = [];
+    let recipesArray = element;
+    recipesArray.forEach(element => {
+        for(let i = 0; i < element.ingredients.length; i ++) {
+            itemArray.push(element.ingredients[i].ingredient.toLowerCase());
         }
     })
-    let finalIngredientsArray = ingredientsArray.filter((item, index) => ingredientsArray.indexOf(item) === index);
-    return finalIngredientsArray;
+    let finalItemArray = itemArray.filter((item, index) => itemArray.indexOf(item) === index);
+    return finalItemArray;
 }
 
-function addOptionsToSelectIngredients() {
-    let ingredientsArray = retrieveIngredients();
-    const select = document.getElementById("ingredients");
-    let firstOption = new Option("Ingrédients", "");
+function addOptionsToSelectElements(itemArray, retrieveElements, element, Elements) {
+    let itemArray = retrieveElements();
+    const select = document.getElementById(element);
+    let firstOption = new Option(Elements, "");
     firstOption.setAttribute("disabled", "");
     firstOption.setAttribute("selected", "");
     select.appendChild(firstOption, undefined);
-    for(index in ingredientsArray) {
+    for(index in itemArray) {
         // New variable option wich stock new option from array
-        let option = new Option(ingredientsArray[index], index);
+        let option = new Option(itemArray[index], index);
         // then adding at the end of the list the option created
         select.options[select.options.length] = option;
     }
 }
 
-function retrieveAppliance() {
-    let applianceArray = [];
-    let recipesArray = recipes;
-    recipesArray.forEach(recipe => {
-        applianceArray.push(recipe.appliance.toLowerCase());
-    })
-    let finalApplianceArray = applianceArray.filter((item, index) => applianceArray.indexOf(item) === index);
-    return finalApplianceArray;
-}
-
-function addOptionsToSelectAppliance() {
-    let applianceArray = retrieveAppliance();
-    const select = document.getElementById("appliance");
-    let firstOption = new Option("Appareils", "");
-    firstOption.setAttribute("disabled", "");
-    firstOption.setAttribute("selected", "");
-    select.appendChild(firstOption, undefined);
-    for(index in applianceArray) {
-       // New variable option wich stock new option from array
-       let option = new Option(applianceArray[index], index);
-       // then adding at the end of the list the option created
-       select.options[select.options.length] = option;
-    }
-}
-
-function retrieveUstensils() {
-    let ustensilsArray = [];
-    let recipesArray = recipes;
-    recipesArray.forEach(recipe => {
-        for(let i = 0; i < recipe.ustensils.length; i ++) {
-            ustensilsArray.push(recipe.ustensils[i].toLowerCase());
-        }
-    })
-    let finalUstensilsArray = ustensilsArray.filter((item, index) => ustensilsArray.indexOf(item) === index);
-    return finalUstensilsArray;
-}
-
-function addOptionsToSelectUstensils() {
-    let ustensilsArray = retrieveUstensils();
-    const select = document.getElementById("ustensils");
-    let firstOption = new Option("Ustensiles", "");
-    firstOption.setAttribute("disabled", "");
-    firstOption.setAttribute("selected", "");
-    select.appendChild(firstOption, undefined);
-    for(index in ustensilsArray) {
-            // New variable option wich stock new option from array
-            let option = new Option(ustensilsArray[index], index);
-            // then adding at the end of the list the option created
-            select.options[select.options.length] = option;    
-    }
-}
-
 function retrieveTags() {
-    addOptionsToSelectIngredients();
-    addOptionsToSelectAppliance();
-    addOptionsToSelectUstensils();
+    addOptionsToSelectElements(ingredientsArray, retrieveElements(recipes, ingredientsArray, finalIngredientsArray), ingredients, Ingrédients);
+    addOptionsToSelectElements(applianceArray, retrieveElements(recipes, applianceArray, finalApplianceArray), appliance, Appareils);
+    addOptionsToSelectElements(ustensilsArray, retrieveElements(recipes, ustensilsArray, finalUstensilsArray), ustensils, Ustensiles);
 }
 
-retrieveTags();
+//----------------------------ALGO 1----------------------------//
+
+// For loops
+
+function retrieveInputSearch() {
+    let inputValue = document.getElementById("search").value.toLowerCase();
+    if(inputValue.length < 3) {
+        return null;
+    }
+    return inputValue;
+}
+
+function lookInRecipes() {
+    let newRecipesArray = [];
+    let recipesArray = recipes;
+    let inputSearch = retrieveInputSearch();
+    for(let i = 0; i < recipesArray.length; i ++) {
+        if(recipesArray[i].name.toLowerCase().includes(inputSearch)) {
+            newRecipesArray.push(recipesArray[i]);
+        } else if(recipesArray[i].description.toLowerCase().includes(inputSearch)) {
+            newRecipesArray.push(recipesArray[i]);
+        } else{
+            for(let j= 0; j < recipesArray[i].ingredients.length; j ++) {
+                if(recipesArray[i].ingredients[j].ingredient.toLowerCase().includes(inputSearch)) {
+                    newRecipesArray.push(recipesArray[i]);
+                }
+            }
+        }
+    } return newRecipesArray;
+}
+
+function retrieveNewTags() {
+    addOptionsToSelectElements(ingredientsArray, retrieveElements(lookInRecipes(), ingredientsArray, finalIngredientsArray), ingredients, Ingrédients);
+    addOptionsToSelectElements(applianceArray, retrieveElements(lookInRecipes(), applianceArray, finalApplianceArray), appliance, Appareils);
+    addOptionsToSelectElements(ustensilsArray, retrieveElements(lookInRecipes(), ustensilsArray, finalUstensilsArray), ustensils, Ustensiles);
+}
+
+
+
+function displayNewData() {
+    let container = document.querySelector(".recipeSection");
+    let childElement = document.querySelector(".container.d-flex.flex-wrap.gap-5.justify-content-between");
+    container.removeChild(childElement);
+    const recipe = lookInRecipes();
+    const recipeSection = document.querySelector(".recipeSection");
+    const recipeModel = recipesFactory(recipe);
+    const recipeDOM = recipeModel.createDOM();
+    recipeSection.appendChild(recipeDOM);
+    let containerOfFilters = document.querySelector(".container.filters");
+    let childRows = containerOfFilters.querySelectorAll("option");
+    //childRows.length = 0;
+    retrieveNewTags();
+}
+
+document.getElementById("search").addEventListener("keyup", displayNewData);
