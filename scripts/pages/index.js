@@ -122,3 +122,30 @@ function retrieveTags() {
 }
 
 retrieveTags();
+
+//----------------------------ALGO 2----------------------------//
+
+// Arrays iterations (filter, map, reduce, ...)
+
+function retrieveInputSearch() {
+    let inputValue = document.getElementById("search").value.toLowerCase();
+    if(inputValue.length < 3) {
+        return null;
+    }
+    return inputValue;
+}
+
+function lookInRecipesArray() {
+    let recipesArray = recipes;
+    let inputSearch = retrieveInputSearch();
+    let resultForName = recipesArray.filter(recipe => recipe.name.toLowerCase().includes(inputSearch));
+    let resultForDescription = recipesArray.filter(recipe => recipe.description.toLowerCase().includes(inputSearch));
+    let resultForIngredients = recipesArray.filter(recipe => {
+        recipe.ingredients.filter(item => item.ingredient.includes(inputSearch));
+    });
+    console.log(resultForName);
+    console.log(resultForDescription);
+    console.log(resultForIngredients);
+}
+
+lookInRecipesArray();
