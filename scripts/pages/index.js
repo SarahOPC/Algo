@@ -154,11 +154,15 @@ function lookInRecipesArray() {
     return combinedUniqueArray;
 }
 
+function removeDuplicates(array) {
+    return array.filter((item, index) => array.indexOf(item) === index);
+}
+
 function retrieveNewAppliance() {
     let applianceArray = [];
     let recipesArray = lookInRecipesArray();
     applianceArray = recipesArray.filter(recipe => recipe.appliance)
-    .map(recipe => recipe.appliance);
+    .map(recipe => recipe.appliance.toLowerCase());
     return applianceArray;
 }
 
@@ -167,27 +171,44 @@ function retrieveNewUstensils() {
     let recipesArray = lookInRecipesArray();
     ustensilsArray = recipesArray.filter(recipe => recipe.ustensils)
     .map(recipe => recipe.ustensils);
-    return ustensilsArray;
+    let justUstensilsArray = [];
+    ustensilsArray.forEach(array => {
+        let i = 0;
+        while(array[i] !== undefined){
+            justUstensilsArray.push(array[i].toLowerCase());
+            i ++;
+        }
+    })
+    return justUstensilsArray;
 }
 
 function retrieveNewIngredients() {
     let ingredientsArray = [];
     let recipesArray = lookInRecipesArray();
-    ingredientsArray = recipesArray.filter(recipe => recipe.ingredients.ingredient)
-    .map(recipe => recipe.ingredients.ingredient);
-    return ingredientsArray;
+    ingredientsArray = recipesArray.filter(recipe => recipe.ingredients)
+    .map(recipe => recipe.ingredients);
+    let justIngredientsArray = [];
+    ingredientsArray.forEach(array => {
+        let i = 0;
+        while(array[i] !== undefined){
+            justIngredientsArray.push(array[i].ingredient.toLowerCase());
+            i ++;
+        }
+    })
+    return justIngredientsArray;
 }
 
 function addOptionsToSelectNewAppliance() {
     let applianceArray = retrieveNewAppliance();
+    let finalApplianceArray = removeDuplicates(applianceArray);
     const select = document.getElementById("appliance");
     let firstOption = new Option("Appareils", "");
     firstOption.setAttribute("disabled", "");
     firstOption.setAttribute("selected", "");
     select.appendChild(firstOption, undefined);
-    for(index in applianceArray) {
+    for(index in finalApplianceArray) {
         // New variable option which stock new option from array
-        let option = new Option(applianceArray[index], index);
+        let option = new Option(finalApplianceArray[index], index);
         // then adding at the end of the list the option created
         select.options[select.options.length] = option;
     }
@@ -195,14 +216,15 @@ function addOptionsToSelectNewAppliance() {
 
 function addOptionsToSelectNewUstensils() {
     let ustensilsArray = retrieveNewUstensils();
+    let finalUstensilsArray = removeDuplicates(ustensilsArray);
     const select = document.getElementById("ustensils");
     let firstOption = new Option("Ustensiles", "");
     firstOption.setAttribute("disabled", "");
     firstOption.setAttribute("selected", "");
     select.appendChild(firstOption, undefined);
-    for(index in ustensilsArray) {
+    for(index in finalUstensilsArray) {
         // New variable option which stock new option from array
-        let option = new Option(ustensilsArray[index], index);
+        let option = new Option(finalUstensilsArray[index], index);
         // then adding at the end of the list the option created
         select.options[select.options.length] = option;
     }
@@ -210,14 +232,16 @@ function addOptionsToSelectNewUstensils() {
 
 function addOptionsToSelectNewIngredients() {
     let ingredientsArray = retrieveNewIngredients();
+    // Remove the duplicates words
+    let finalCombinedIngredientsArray = [...new Set(ingredientsArray)];
     const select = document.getElementById("ingredients");
     let firstOption = new Option("Ingrédients", "");
     firstOption.setAttribute("disabled", "");
     firstOption.setAttribute("selected", "");
     select.appendChild(firstOption, undefined);
-    for(index in ingredientsArray) {
+    for(index in finalCombinedIngredientsArray) {
         // New variable option which stock new option from array
-        let option = new Option(ingredientsArray[index], index);
+        let option = new Option(finalCombinedIngredientsArray[index], index);
         // then adding at the end of the list the option created
         select.options[select.options.length] = option;
     }
