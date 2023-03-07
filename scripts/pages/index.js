@@ -51,16 +51,11 @@ function retrieveIngredients() {
 function addOptionsToSelectIngredients() {
     let ingredientsArray = retrieveIngredients();
     const datalist = document.getElementById("ingredients");
-    let firstOption = new Option("Ingrédients", "");
-    firstOption.setAttribute("disabled", "");
-    firstOption.setAttribute("selected", "");
-    datalist.appendChild(firstOption, undefined);
-    for(index in ingredientsArray) {
-        // New variable option wich stock new option from array
-        let option = new Option(ingredientsArray[index], index);
-        // then adding at the end of the list the option created
-        datalist.options[datalist.options.length] = option;
-    }
+    ingredientsArray.forEach(ingredient => {
+        let option = document.createElement( 'option' );
+        option.value = ingredient;
+        datalist.appendChild(option);    
+    })
 }
 
 function retrieveAppliance() {
@@ -76,16 +71,11 @@ function retrieveAppliance() {
 function addOptionsToSelectAppliance() {
     let applianceArray = retrieveAppliance();
     const datalist = document.getElementById("appliance");
-    let firstOption = new Option("Appareils", "");
-    firstOption.setAttribute("disabled", "");
-    firstOption.setAttribute("selected", "");
-    datalist.appendChild(firstOption, undefined);
-    for(index in applianceArray) {
-       // New variable option wich stock new option from array
-       let option = new Option(applianceArray[index], index);
-       // then adding at the end of the list the option created
-       datalist.options[datalist.options.length] = option;
-    }
+    applianceArray.forEach(appliance => {
+        let option = document.createElement( 'option' );
+        option.value = appliance;
+        datalist.appendChild(option);    
+    })
 }
 
 function retrieveUstensils() {
@@ -103,16 +93,11 @@ function retrieveUstensils() {
 function addOptionsToSelectUstensils() {
     let ustensilsArray = retrieveUstensils();
     const datalist = document.getElementById("ustensils");
-    let firstOption = new Option("Ustensiles", "");
-    firstOption.setAttribute("disabled", "");
-    firstOption.setAttribute("selected", "");
-    datalist.appendChild(firstOption, undefined);
-    for(index in ustensilsArray) {
-            // New variable option wich stock new option from array
-            let option = new Option(ustensilsArray[index], index);
-            // then adding at the end of the list the option created
-            datalist.options[datalist.options.length] = option;    
-    }
+    ustensilsArray.forEach(ustensil => {
+        let option = document.createElement( 'option' );
+        option.value = ustensil;
+        datalist.appendChild(option);    
+    })
 }
 
 function retrieveTags() {
@@ -201,50 +186,32 @@ function retrieveNewIngredients() {
 function addOptionsToSelectNewAppliance() {
     let applianceArray = retrieveNewAppliance();
     let finalApplianceArray = removeDuplicates(applianceArray);
-    const datalist = document.getElementById("appliance");
-    let firstOption = new Option("Appareils", "");
-    firstOption.setAttribute("disabled", "");
-    firstOption.setAttribute("selected", "");
-    datalist.appendChild(firstOption, undefined);
-    for(index in finalApplianceArray) {
-        // New variable option which stock new option from array
-        let option = new Option(finalApplianceArray[index], index);
-        // then adding at the end of the list the option created
-        datalist.options[datalist.options.length] = option;
-    }
+    finalApplianceArray.forEach(appliance => {
+        let option = document.createElement( 'option' );
+        option.value = appliance;
+        datalist.appendChild(option);    
+    })
 }
 
 function addOptionsToSelectNewUstensils() {
     let ustensilsArray = retrieveNewUstensils();
     let finalUstensilsArray = removeDuplicates(ustensilsArray);
-    const datalist = document.getElementById("ustensils");
-    let firstOption = new Option("Ustensiles", "");
-    firstOption.setAttribute("disabled", "");
-    firstOption.setAttribute("selected", "");
-    datalist.appendChild(firstOption, undefined);
-    for(index in finalUstensilsArray) {
-        // New variable option which stock new option from array
-        let option = new Option(finalUstensilsArray[index], index);
-        // then adding at the end of the list the option created
-        datalist.options[datalist.options.length] = option;
-    }
+    finalUstensilsArray.forEach(ustensil => {
+        let option = document.createElement( 'option' );
+        option.value = ustensil;
+        datalist.appendChild(option);    
+    })
 }
 
 function addOptionsToSelectNewIngredients() {
     let ingredientsArray = retrieveNewIngredients();
     // Remove the duplicates words
     let finalCombinedIngredientsArray = [...new Set(ingredientsArray)];
-    const datalist = document.getElementById("ingredients");
-    let firstOption = new Option("Ingrédients", "");
-    firstOption.setAttribute("disabled", "");
-    firstOption.setAttribute("selected", "");
-    datalist.appendChild(firstOption, undefined);
-    for(index in finalCombinedIngredientsArray) {
-        // New variable option which stock new option from array
-        let option = new Option(finalCombinedIngredientsArray[index], index);
-        // then adding at the end of the list the option created
-        datalist.options[datalist.options.length] = option;
-    }
+    finalCombinedIngredientsArray.forEach(ingredient => {
+        let option = document.createElement( 'option' );
+        option.value = ingredient;
+        datalist.appendChild(option);    
+    })
 }
 
 function retrieveNewTags() {

@@ -33,21 +33,24 @@
     font-size: 130%;
 }
 
-.ingredients, #ingredients {
+.ingredients, #ingredients, #ingredientsInput {
     background-color: #3282F7;
     border-color: #3282F7;
+    border-style: none;
     color: #FFFFFF;
 }
 
-.appliance, #appliance {
+.appliance, #appliance, #applianceInput {
     background-color: #68D9A4;
     border-color: #68D9A4;
+    border-style: none;
     color: #FFFFFF;
 }
 
-.ustensils, #ustensils {
+.ustensils, #ustensils, #ustensilsInput {
     background-color: #ED6454;
     border-color: #ED6454;
+    border-style: none;
     color: #FFFFFF;
 }
 
@@ -77,4 +80,10 @@
 .col-2.rounded-2.appliance.d-flex.align-items-baseline,
 .col-2.rounded-2.ustensils.d-flex.align-items-baseline {
     box-sizing: content-box;
+}
+
+::placeholder {
+    color: #FFFFFF;
+    opacity: 1;
+    font-weight: 600;
 }
