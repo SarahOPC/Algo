@@ -33,6 +33,10 @@
     font-size: 130%;
 }
 
+.search ::placeholder {
+    color: #000000;
+}
+
 .ingredients, #ingredients, #ingredientsInput {
     background-color: #3282F7;
     border-color: #3282F7;
