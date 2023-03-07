@@ -40,62 +40,65 @@ retrieveTags();
 function retrieveIngredients() {
     let ingredientsArray = [];
     let recipesArray = recipes;
-    recipesArray.forEach(recipe => {
-        for(let i = 0; i < recipe.ingredients.length; i ++) {
-            ingredientsArray.push(recipe.ingredients[i].ingredient.toLowerCase());
-        }
-    })
-    return ingredientsArray.filter((item, index) => ingredientsArray.indexOf(item) === index);
+    for(let j = 0; j < recipesArray.length; j ++) {
+        for(let i = 0; i < recipesArray[j].ingredients.length; i ++) {
+            ingredientsArray.push(recipesArray[j].ingredients[i].ingredient.toLowerCase());
+        }  
+    }
+    let combinedIngredientsArray = removeDuplicates(ingredientsArray);
+    return combinedIngredientsArray;
 }
 
 function retrieveAppliance() {
     let applianceArray = [];
     let recipesArray = recipes;
-    recipesArray.forEach(recipe => {
-        applianceArray.push(recipe.appliance.toLowerCase());
-    })
-    return applianceArray.filter((item, index) => applianceArray.indexOf(item) === index);
+    for(let i = 0; i < recipesArray.length; i ++) {
+            applianceArray.push(recipesArray[i].appliance.toLowerCase());
+    }
+    let combinedApplianceArray = removeDuplicates(applianceArray);
+    return combinedApplianceArray;
 }
 
 function retrieveUstensils() {
     let ustensilsArray = [];
     let recipesArray = recipes;
-    recipesArray.forEach(recipe => {
-        for(let i = 0; i < recipe.ustensils.length; i ++) {
-            ustensilsArray.push(recipe.ustensils[i].toLowerCase());
+    for(let i = 0; i < recipesArray.length; i ++) {
+        for(let j = 0; j < recipesArray[i].ustensils.length; j ++) {
+            ustensilsArray.push(recipesArray[i].ustensils[j].toLowerCase());
         }
-    })
-    return ustensilsArray.filter((item, index) => ustensilsArray.indexOf(item) === index);
+    }
+    let combinedUstensilsArray = removeDuplicates(ustensilsArray);
+    return combinedUstensilsArray;
 }
 
 function addOptionsToSelectIngredients() {
     let ingredientsArray = retrieveIngredients();
     const datalist = document.getElementById("ingredients");
-    ingredientsArray.forEach(ingredient => {
+    for(let i = 0; i < ingredientsArray.length; i ++) {
         let option = document.createElement( 'option' );
-        option.value = ingredient;
+        option.value = ingredientsArray[i];
         datalist.appendChild(option);    
-    })
+    }
 }
 
 function addOptionsToSelectAppliance() {
     let applianceArray = retrieveAppliance();
     const datalist = document.getElementById("appliance");
-    applianceArray.forEach(appliance => {
+    for(let i = 0; i < applianceArray.length; i ++) {
         let option = document.createElement( 'option' );
-        option.value = appliance;
-        datalist.appendChild(option);    
-    })
+        option.value = applianceArray[i];
+        datalist.appendChild(option);
+    }
 }
 
 function addOptionsToSelectUstensils() {
     let ustensilsArray = retrieveUstensils();
     const datalist = document.getElementById("ustensils");
-    ustensilsArray.forEach(ustensil => {
+    for(let i = 0; i < ustensilsArray.length; i ++) {
         let option = document.createElement( 'option' );
-        option.value = ustensil;
-        datalist.appendChild(option);    
-    })
+        option.value = ustensilsArray[i];
+        datalist.appendChild(option);
+    }
 }
 
 function retrieveTags() {
@@ -135,65 +138,78 @@ function lookInRecipes() {
     } return newRecipesArray;
 }
 
+function removeDuplicates(array) {
+    let combinedArray = [];
+    for(let i = 0; i < array.length; i ++) {
+        if(combinedArray.indexOf(array[i]) === -1) {
+            combinedArray.push(array[i]);
+        }
+    }
+    return combinedArray;
+}
+
 function retrieveNewIngredients() {
     let ingredientsArray = [];
     let recipesArray = lookInRecipes();
-    recipesArray.forEach(recipe => {
-        for(let i = 0; i < recipe.ingredients.length; i ++) {
-            ingredientsArray.push(recipe.ingredients[i].ingredient.toLowerCase());
+    for(let i = 0; i < recipesArray.length; i ++) {
+        for(let j = 0; j < recipesArray[i].ingredients.length; j ++) {
+            ingredientsArray.push(recipesArray[i].ingredients[j].ingredient.toLowerCase());
         }
-    })
-    return ingredientsArray.filter((item, index) => ingredientsArray.indexOf(item) === index);
+    }
+    let combinedIngredientsArray = removeDuplicates(ingredientsArray);
+    return combinedIngredientsArray;
 }
 
 function retrieveNewAppliance() {
     let applianceArray = [];
     let recipesArray = lookInRecipes();
-    recipesArray.forEach(recipe => {
-        applianceArray.push(recipe.appliance.toLowerCase());
-    })
-    return applianceArray.filter((item, index) => applianceArray.indexOf(item) === index);
+    for(let i = 0; i < recipesArray.length; i ++) {
+        applianceArray.push(recipesArray[i].appliance.toLowerCase());
+    }
+    let combinedApplianceArray = removeDuplicates(applianceArray);
+    return combinedApplianceArray;
 }
 
 function retrieveNewUstensils() {
     let ustensilsArray = [];
     let recipesArray = lookInRecipes();
-    recipesArray.forEach(recipe => {
-        for(let i = 0; i < recipe.ustensils.length; i ++) {
-            ustensilsArray.push(recipe.ustensils[i].toLowerCase());
+    for(let i = 0; i < recipesArray.length; i ++) {
+        for(let j = 0; j < recipesArray[i].ustensils.length; j ++) {
+            ustensilsArray.push(recipesArray[i].ustensils[j].toLowerCase());
         }
-    })
-    return ustensilsArray.filter((item, index) => ustensilsArray.indexOf(item) === index);
+    }
+    let combinedUstensilsArray = removeDuplicates(ustensilsArray);
+    return combinedUstensilsArray;
 }
 
 function addOptionsToSelectNewIngredients() {
     let ingredientsArray = retrieveNewIngredients();
     const datalist = document.getElementById("ingredients");
-    ingredientsArray.forEach(ingredient => {
+    for(let i = 0; i < ingredientsArray.length; i ++) {
         let option = document.createElement( 'option' );
-        option.value = ingredient;
+        option.value = ingredientsArray[i];
         datalist.appendChild(option);    
-    })
+    }
 }
 
 function addOptionsToSelectNewAppliance() {
     let applianceArray = retrieveNewAppliance();
     const datalist = document.getElementById("appliance");
-    applianceArray.forEach(appliance => {
+    for(let i = 0; i < applianceArray.length; i ++) {
         let option = document.createElement( 'option' );
-        option.value = appliance;
+        option.value = applianceArray[i];
         datalist.appendChild(option);    
-    })
+    }
 }
 
 function addOptionsToSelectNewUstensils() {
     let ustensilsArray = retrieveNewUstensils();
     const datalist = document.getElementById("ustensils");
-    ustensilsArray.forEach(ustensil => {
+    for(let i = 0; ustensilsArray.length; i ++) {
         let option = document.createElement( 'option' );
-        option.value = ustensil;
+        option.value = ustensilsArray[i];
         datalist.appendChild(option);    
-    })
+    }
 }
 
 function retrieveNewTags() {
