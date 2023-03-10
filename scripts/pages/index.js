@@ -190,6 +190,7 @@ function addOptionsToSelectNewIngredients() {
         option.value = ingredientsArray[i];
         datalist.appendChild(option);    
     }
+    return datalist;
 }
 
 function addOptionsToSelectNewAppliance() {
@@ -200,6 +201,7 @@ function addOptionsToSelectNewAppliance() {
         option.value = applianceArray[i];
         datalist.appendChild(option);    
     }
+    return datalist;
 }
 
 function addOptionsToSelectNewUstensils() {
@@ -210,6 +212,7 @@ function addOptionsToSelectNewUstensils() {
         option.value = ustensilsArray[i];
         datalist.appendChild(option);    
     }
+    return datalist;
 }
 
 function retrieveNewTags() {
@@ -218,28 +221,31 @@ function retrieveNewTags() {
     addOptionsToSelectNewUstensils();
 }
 
-function removeAll(selectBox) {
-    while (selectBox.options.length > 0) {
-        selectBox.remove(0);
+function removeAll(datalist) {
+    while (datalist.options.length > 0) {
+        datalist.children[0].remove();
     }
 }
 
 function displayNewData() {
-    let container = document.querySelector(".recipeSection");
-    let childElement = document.querySelector(".container.d-flex.flex-wrap.gap-5.justify-content-between");
-    container.removeChild(childElement);
-    const recipe = lookInRecipes();
-    const recipeSection = document.querySelector(".recipeSection");
-    const recipeModel = recipesFactory(recipe);
-    const recipeDOM = recipeModel.createDOM();
-    recipeSection.appendChild(recipeDOM);
-    let containerOfOptionsIngredients = document.getElementById("ingredients");
-    removeAll(containerOfOptionsIngredients);
-    let containerOfOptionsAppliance = document.getElementById("appliance");
-    removeAll(containerOfOptionsAppliance);
-    let containerOfOptionsUstensils = document.getElementById("ustensils");
-    removeAll(containerOfOptionsUstensils);
-    retrieveNewTags();
+    let inputSearch = retrieveInputSearch();
+    if(inputSearch !== null) {
+        let container = document.querySelector(".recipeSection");
+        let childElement = document.querySelector(".container.d-flex.flex-wrap.gap-5.justify-content-between");
+        container.removeChild(childElement);
+        const recipe = lookInRecipes();
+        const recipeSection = document.querySelector(".recipeSection");
+        const recipeModel = recipesFactory(recipe);
+        const recipeDOM = recipeModel.createDOM();
+        recipeSection.appendChild(recipeDOM);
+        let containerOfOptionsIngredients = document.getElementById("ingredients");
+        removeAll(containerOfOptionsIngredients);
+        let containerOfOptionsAppliance = document.getElementById("appliance");
+        removeAll(containerOfOptionsAppliance);
+        let containerOfOptionsUstensils = document.getElementById("ustensils");
+        removeAll(containerOfOptionsUstensils);
+        retrieveNewTags();
+    }
 }
 
 document.getElementById("search").addEventListener("keyup", displayNewData);
