@@ -186,6 +186,7 @@ function retrieveNewIngredients() {
 function addOptionsToSelectNewAppliance() {
     let applianceArray = retrieveNewAppliance();
     let finalApplianceArray = removeDuplicates(applianceArray);
+    const datalist = document.getElementById("appliance");
     finalApplianceArray.forEach(appliance => {
         let option = document.createElement( 'option' );
         option.value = appliance;
@@ -196,6 +197,7 @@ function addOptionsToSelectNewAppliance() {
 function addOptionsToSelectNewUstensils() {
     let ustensilsArray = retrieveNewUstensils();
     let finalUstensilsArray = removeDuplicates(ustensilsArray);
+    const datalist = document.getElementById("ustensils");
     finalUstensilsArray.forEach(ustensil => {
         let option = document.createElement( 'option' );
         option.value = ustensil;
@@ -207,6 +209,7 @@ function addOptionsToSelectNewIngredients() {
     let ingredientsArray = retrieveNewIngredients();
     // Remove the duplicates words
     let finalCombinedIngredientsArray = [...new Set(ingredientsArray)];
+    const datalist = document.getElementById("ingredients");
     finalCombinedIngredientsArray.forEach(ingredient => {
         let option = document.createElement( 'option' );
         option.value = ingredient;
