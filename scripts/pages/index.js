@@ -207,11 +207,16 @@ function addOptionsToSelectNewAppliance() {
 function addOptionsToSelectNewUstensils() {
     let ustensilsArray = retrieveNewUstensils();
     const datalist = document.getElementById("ustensils");
-    for(let i = 0; ustensilsArray.length; i ++) {
+    for(let i = 0; i < ustensilsArray.length; i ++) {
+        console.log("a");
         let option = document.createElement( 'option' );
+        console.log("b");
         option.value = ustensilsArray[i];
+        console.log("c");
         datalist.appendChild(option);    
+        console.log("d");
     }
+    console.log("e");
     return datalist;
 }
 
