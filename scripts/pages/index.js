@@ -220,9 +220,9 @@ function retrieveNewTags() {
     addOptionsToSelectNewIngredients();
 }
 
-function removeAll(selectBox) {
-    while (selectBox.options.length > 0) {
-        selectBox.remove(0);
+function removeAll(datalist) {
+    while (datalist.options.length > 0) {
+        datalist.children[0].remove();
     }
 }
 
