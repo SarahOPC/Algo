@@ -35,6 +35,7 @@ async function displayData() {
 }
 
 displayData();
+retrieveTags();
 
 function retrieveIngredients() {
     let ingredientsArray = [];
@@ -81,13 +82,33 @@ function addOptionsToSelectAppliance() {
 function retrieveUstensils() {
     let ustensilsArray = [];
     let recipesArray = recipes;
-    recipesArray.forEach(recipe => {
-        for(let i = 0; i < recipe.ustensils.length; i ++) {
-            ustensilsArray.push(recipe.ustensils[i].toLowerCase());
+    for(let i = 0; i < recipesArray.length; i ++) {
+        for(let j = 0; j < recipesArray[i].ustensils.length; j ++) {
+            ustensilsArray.push(recipesArray[i].ustensils[j].toLowerCase());
         }
-    })
-    let finalUstensilsArray = ustensilsArray.filter((item, index) => ustensilsArray.indexOf(item) === index);
-    return finalUstensilsArray;
+    }
+    let combinedUstensilsArray = removeDuplicates(ustensilsArray);
+    return combinedUstensilsArray;
+}
+
+function addOptionsToSelectIngredients() {
+    let ingredientsArray = retrieveIngredients();
+    const datalist = document.getElementById("ingredients");
+    for(let i = 0; i < ingredientsArray.length; i ++) {
+        let option = document.createElement( 'option' );
+        option.value = ingredientsArray[i];
+        datalist.appendChild(option);    
+    }
+}
+
+function addOptionsToSelectAppliance() {
+    let applianceArray = retrieveAppliance();
+    const datalist = document.getElementById("appliance");
+    for(let i = 0; i < applianceArray.length; i ++) {
+        let option = document.createElement( 'option' );
+        option.value = applianceArray[i];
+        datalist.appendChild(option);
+    }
 }
 
 function addOptionsToSelectUstensils() {
@@ -106,4 +127,150 @@ function retrieveTags() {
     addOptionsToSelectUstensils();
 }
 
-retrieveTags();
+//----------------------------ALGO 1----------------------------//
+
+// For loops
+
+function retrieveInputSearch() {
+    let inputValue = document.getElementById("search").value.toLowerCase();
+    if(inputValue.length < 3) {
+        return null;
+    }
+    return inputValue;
+}
+
+function lookInRecipes() {
+    let newRecipesArray = [];
+    let recipesArray = recipes;
+    let inputSearch = retrieveInputSearch();
+    for(let i = 0; i < recipesArray.length; i ++) {
+        if(recipesArray[i].name.toLowerCase().includes(inputSearch)) {
+            newRecipesArray.push(recipesArray[i]);
+        } else if(recipesArray[i].description.toLowerCase().includes(inputSearch)) {
+            newRecipesArray.push(recipesArray[i]);
+        } else{
+            for(let j= 0; j < recipesArray[i].ingredients.length; j ++) {
+                if(recipesArray[i].ingredients[j].ingredient.toLowerCase().includes(inputSearch)) {
+                    newRecipesArray.push(recipesArray[i]);
+                }
+            }
+        }
+    } return newRecipesArray;
+}
+
+function removeDuplicates(array) {
+    let combinedArray = [];
+    for(let i = 0; i < array.length; i ++) {
+        if(combinedArray.indexOf(array[i]) === -1) {
+            combinedArray.push(array[i]);
+        }
+    }
+    return combinedArray;
+}
+
+function retrieveNewIngredients() {
+    let ingredientsArray = [];
+    let recipesArray = lookInRecipes();
+    for(let i = 0; i < recipesArray.length; i ++) {
+        for(let j = 0; j < recipesArray[i].ingredients.length; j ++) {
+            ingredientsArray.push(recipesArray[i].ingredients[j].ingredient.toLowerCase());
+        }
+    }
+    let combinedIngredientsArray = removeDuplicates(ingredientsArray);
+    return combinedIngredientsArray;
+}
+
+function retrieveNewAppliance() {
+    let applianceArray = [];
+    let recipesArray = lookInRecipes();
+    for(let i = 0; i < recipesArray.length; i ++) {
+        applianceArray.push(recipesArray[i].appliance.toLowerCase());
+    }
+    let combinedApplianceArray = removeDuplicates(applianceArray);
+    return combinedApplianceArray;
+}
+
+function retrieveNewUstensils() {
+    let ustensilsArray = [];
+    let recipesArray = lookInRecipes();
+    for(let i = 0; i < recipesArray.length; i ++) {
+        for(let j = 0; j < recipesArray[i].ustensils.length; j ++) {
+            ustensilsArray.push(recipesArray[i].ustensils[j].toLowerCase());
+        }
+    }
+    let combinedUstensilsArray = removeDuplicates(ustensilsArray);
+    return combinedUstensilsArray;
+}
+
+function addOptionsToSelectNewIngredients() {
+    let ingredientsArray = retrieveNewIngredients();
+    const datalist = document.getElementById("ingredients");
+    for(let i = 0; i < ingredientsArray.length; i ++) {
+        let option = document.createElement( 'option' );
+        option.value = ingredientsArray[i];
+        datalist.appendChild(option);    
+    }
+    return datalist;
+}
+
+function addOptionsToSelectNewAppliance() {
+    let applianceArray = retrieveNewAppliance();
+    const datalist = document.getElementById("appliance");
+    for(let i = 0; i < applianceArray.length; i ++) {
+        let option = document.createElement( 'option' );
+        option.value = applianceArray[i];
+        datalist.appendChild(option);    
+    }
+    return datalist;
+}
+
+function addOptionsToSelectNewUstensils() {
+    let ustensilsArray = retrieveNewUstensils();
+    const datalist = document.getElementById("ustensils");
+    for(let i = 0; i < ustensilsArray.length; i ++) {
+        console.log("a");
+        let option = document.createElement( 'option' );
+        console.log("b");
+        option.value = ustensilsArray[i];
+        console.log("c");
+        datalist.appendChild(option);    
+        console.log("d");
+    }
+    console.log("e");
+    return datalist;
+}
+
+function retrieveNewTags() {
+    addOptionsToSelectNewIngredients();
+    addOptionsToSelectNewAppliance();
+    addOptionsToSelectNewUstensils();
+}
+
+function removeAll(datalist) {
+    while (datalist.options.length > 0) {
+        datalist.children[0].remove();
+    }
+}
+
+function displayNewData() {
+    let inputSearch = retrieveInputSearch();
+    if(inputSearch !== null) {
+        let container = document.querySelector(".recipeSection");
+        let childElement = document.querySelector(".container.d-flex.flex-wrap.gap-5.justify-content-between");
+        container.removeChild(childElement);
+        const recipe = lookInRecipes();
+        const recipeSection = document.querySelector(".recipeSection");
+        const recipeModel = recipesFactory(recipe);
+        const recipeDOM = recipeModel.createDOM();
+        recipeSection.appendChild(recipeDOM);
+        let containerOfOptionsIngredients = document.getElementById("ingredients");
+        removeAll(containerOfOptionsIngredients);
+        let containerOfOptionsAppliance = document.getElementById("appliance");
+        removeAll(containerOfOptionsAppliance);
+        let containerOfOptionsUstensils = document.getElementById("ustensils");
+        removeAll(containerOfOptionsUstensils);
+        retrieveNewTags();
+    }
+}
+
+document.getElementById("search").addEventListener("keyup", displayNewData);
