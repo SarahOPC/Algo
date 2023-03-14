@@ -127,6 +127,13 @@ function retrieveTags() {
     addOptionsToSelectUstensils();
 }
 
+function returnToNormal() {
+    let inputValue = document.getElementById("search").value.toLowerCase();
+    if(inputValue.length == 0) {
+        location.reload();
+    }
+}
+
 //----------------------------ALGO 1----------------------------//
 
 // For loops
@@ -228,15 +235,10 @@ function addOptionsToSelectNewUstensils() {
     let ustensilsArray = retrieveNewUstensils();
     const datalist = document.getElementById("ustensils");
     for(let i = 0; i < ustensilsArray.length; i ++) {
-        console.log("a");
         let option = document.createElement( 'option' );
-        console.log("b");
         option.value = ustensilsArray[i];
-        console.log("c");
         datalist.appendChild(option);    
-        console.log("d");
     }
-    console.log("e");
     return datalist;
 }
 
@@ -270,6 +272,9 @@ function displayNewData() {
         let containerOfOptionsUstensils = document.getElementById("ustensils");
         removeAll(containerOfOptionsUstensils);
         retrieveNewTags();
+    }
+    else {
+        returnToNormal();
     }
 }
 
