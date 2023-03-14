@@ -102,3 +102,8 @@
     padding: 0.5%;
     border-radius: 0.3em;
 }
+
+ .mainTag .fa-circle-xmark:before {
+    font-size: 3em;
+    color: white;
+}

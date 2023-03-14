@@ -326,9 +326,9 @@ document.getElementById("ingredientsInput").addEventListener("focusout", functio
         const pTag = document.createElement( 'p' );
         pTag.setAttribute("class", "tagIngredient");
         const close = document.createElement( 'i' );
-        close.setAttribute("class", "fa fa-circle-xmark");
+        close.setAttribute("class", "fa fa-times-circle"); //-----------ADDING PNG IMAGE INSTEAD OF ICON "CLOSE.PNG"
         pTag.textContent = ingredientsTagInput.value.toLowerCase();
-        
+        pTag.appendChild(close);
         const mainTag = document.querySelector(".mainTag");
         mainTag.appendChild(pTag);
     }
@@ -340,7 +340,7 @@ document.getElementById("applianceInput").addEventListener("focusout", function(
         const pTag = document.createElement( 'p' );
         pTag.setAttribute("class", "tagAppliance");
         const close = document.createElement( 'i' );
-        close.setAttribute("class", "fa fa-circle-xmark");
+        close.setAttribute("class", "fa fa-times-circle");
         pTag.textContent = applianceTagInput.value.toLowerCase();
         pTag.appendChild(close);
         const mainTag = document.querySelector(".mainTag");
@@ -354,7 +354,7 @@ document.getElementById("ustensilsInput").addEventListener("focusout", function(
         const pTag = document.createElement( 'p' );
         pTag.setAttribute("class", "tagUstensils");
         const close = document.createElement( 'i' );
-        close.setAttribute("class", "fa fa-circle-xmark");
+        close.setAttribute("class", "fa fa-times-circle");
         pTag.textContent = ustensilsTagInput.value.toLowerCase();
         pTag.appendChild(close);
         const mainTag = document.querySelector(".mainTag");
