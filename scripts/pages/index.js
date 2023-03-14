@@ -146,18 +146,45 @@ function retrieveInputSearch() {
     return inputValue;
 }
 
+function retrieveInputIngredientsTag() {
+    let inputIngredientsValue = document.getElementById("ingredientsInput").value.toLowerCase();
+    if(inputIngredientsValue.length < 2) {
+        return null;
+    }
+    return inputIngredientsValue;
+}
+
+function retrieveInputApplianceTag() {
+    let inputApplianceValue = document.getElementById("applianceInput").value.toLowerCase();
+    if(inputApplianceValue.length < 2) {
+        return null;
+    }
+    return inputApplianceValue;
+}
+
+function retrieveInputUstensilsTag() {
+    let inputUstensilsValue = document.getElementById("ustensilsInput").value.toLowerCase();
+    if(inputUstensilsValue.length < 2) {
+        return null;
+    }
+    return inputUstensilsValue;
+}
+
 function lookInRecipes() {
     let newRecipesArray = [];
     let recipesArray = recipes;
     let inputSearch = retrieveInputSearch();
+    let inputIngredientsValue = retrieveInputIngredientsTag();
+    let inputApplianceValue = retrieveInputApplianceTag();
+    let inputUstensilsValue = retrieveInputUstensilsTag();
     for(let i = 0; i < recipesArray.length; i ++) {
-        if(recipesArray[i].name.toLowerCase().includes(inputSearch)) {
+        if(recipesArray[i].name.toLowerCase().includes(inputSearch) || recipesArray[i].name.toLowerCase().includes(inputIngredientsValue) || recipesArray[i].name.toLowerCase().includes(inputApplianceValue) || recipesArray[i].name.toLowerCase().includes(inputUstensilsValue)) {
             newRecipesArray.push(recipesArray[i]);
-        } else if(recipesArray[i].description.toLowerCase().includes(inputSearch)) {
+        } else if(recipesArray[i].description.toLowerCase().includes(inputSearch) || recipesArray[i].description.toLowerCase().includes(inputIngredientsValue) || recipesArray[i].description.toLowerCase().includes(inputApplianceValue) || recipesArray[i].description.toLowerCase().includes(inputUstensilsValue)) {
             newRecipesArray.push(recipesArray[i]);
         } else{
             for(let j= 0; j < recipesArray[i].ingredients.length; j ++) {
-                if(recipesArray[i].ingredients[j].ingredient.toLowerCase().includes(inputSearch)) {
+                if(recipesArray[i].ingredients[j].ingredient.toLowerCase().includes(inputSearch) || recipesArray[i].ingredients[j].ingredient.toLowerCase().includes(inputIngredientsValue) || recipesArray[i].ingredients[j].ingredient.toLowerCase().includes(inputApplianceValue) || recipesArray[i].ingredients[j].ingredient.toLowerCase().includes(inputUstensilsValue)) {
                     newRecipesArray.push(recipesArray[i]);
                 }
             }
@@ -256,7 +283,10 @@ function removeAll(datalist) {
 
 function displayNewData() {
     let inputSearch = retrieveInputSearch();
-    if(inputSearch !== null) {
+    let ingredientsTagInput = document.getElementById("ingredientsInput");
+    let applianceTagInput = document.getElementById("applianceInput");
+    let ustensilsTagInput = document.getElementById("ustensilsInput");
+    if(inputSearch !== null || ingredientsTagInput.value !== "" || applianceTagInput.value !== "" || ustensilsTagInput.value !== "") {
         let container = document.querySelector(".recipeSection");
         let childElement = document.querySelector(".container.d-flex.flex-wrap.gap-5.justify-content-between");
         container.removeChild(childElement);
@@ -279,3 +309,55 @@ function displayNewData() {
 }
 
 document.getElementById("search").addEventListener("keyup", displayNewData);
+
+//----------------------------RetrieveTagsInputToDisplaySelectedRecipes----------------------------//
+
+document.getElementById("ingredientsInput").addEventListener("keyup", displayNewData);
+
+document.getElementById("applianceInput").addEventListener("keyup", displayNewData);
+
+document.getElementById("ustensilsInput").addEventListener("keyup", displayNewData);
+
+//----------------------------DisplayTags----------------------------//
+
+document.getElementById("ingredientsInput").addEventListener("focusout", function() {
+    let ingredientsTagInput = document.getElementById("ingredientsInput");
+    if(ingredientsTagInput.value.length >= 3) {
+        const pTag = document.createElement( 'p' );
+        pTag.setAttribute("class", "tagIngredient");
+        const close = document.createElement( 'i' );
+        close.setAttribute("class", "fa fa-circle-xmark");
+        pTag.textContent = ingredientsTagInput.value.toLowerCase();
+        
+        const mainTag = document.querySelector(".mainTag");
+        mainTag.appendChild(pTag);
+    }
+});
+
+document.getElementById("applianceInput").addEventListener("focusout", function() {
+    let applianceTagInput = document.getElementById("applianceInput");
+    if(applianceTagInput.value.length >= 3) {
+        const pTag = document.createElement( 'p' );
+        pTag.setAttribute("class", "tagAppliance");
+        const close = document.createElement( 'i' );
+        close.setAttribute("class", "fa fa-circle-xmark");
+        pTag.textContent = applianceTagInput.value.toLowerCase();
+        pTag.appendChild(close);
+        const mainTag = document.querySelector(".mainTag");
+        mainTag.appendChild(pTag);
+    }
+});
+
+document.getElementById("ustensilsInput").addEventListener("focusout", function() {
+    let ustensilsTagInput = document.getElementById("ustensilsInput");
+    if(ustensilsTagInput.value.length >= 3) {
+        const pTag = document.createElement( 'p' );
+        pTag.setAttribute("class", "tagUstensils");
+        const close = document.createElement( 'i' );
+        close.setAttribute("class", "fa fa-circle-xmark");
+        pTag.textContent = ustensilsTagInput.value.toLowerCase();
+        pTag.appendChild(close);
+        const mainTag = document.querySelector(".mainTag");
+        mainTag.appendChild(pTag);
+    }
+});

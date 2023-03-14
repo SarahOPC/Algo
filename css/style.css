@@ -37,21 +37,21 @@
     color: #000000;
 }
 
-.ingredients, #ingredients, #ingredientsInput {
+.ingredients, #ingredients, #ingredientsInput, .tagIngredient {
     background-color: #3282F7;
     border-color: #3282F7;
     border-style: none;
     color: #FFFFFF;
 }
 
-.appliance, #appliance, #applianceInput {
+.appliance, #appliance, #applianceInput, .tagAppliance {
     background-color: #68D9A4;
     border-color: #68D9A4;
     border-style: none;
     color: #FFFFFF;
 }
 
-.ustensils, #ustensils, #ustensilsInput {
+.ustensils, #ustensils, #ustensilsInput, .tagUstensils {
     background-color: #ED6454;
     border-color: #ED6454;
     border-style: none;
@@ -90,4 +90,15 @@
     color: #FFFFFF;
     opacity: 1;
     font-weight: 600;
+}
+
+.mainTag {
+    display: flex;
+    margin-left: 9%;
+}
+
+.tagIngredient, .tagAppliance, .tagUstensils {
+    margin: 1%;
+    padding: 0.5%;
+    border-radius: 0.3em;
 }
