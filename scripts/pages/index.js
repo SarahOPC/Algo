@@ -320,13 +320,22 @@ document.getElementById("ustensilsInput").addEventListener("keyup", displayNewDa
 
 //----------------------------DisplayTags----------------------------//
 
+function closeTag(idName) {
+    document.getElementById(idName).remove();
+}
+
 document.getElementById("ingredientsInput").addEventListener("focusout", function() {
     let ingredientsTagInput = document.getElementById("ingredientsInput");
     if(ingredientsTagInput.value.length >= 3) {
         const pTag = document.createElement( 'p' );
         pTag.setAttribute("class", "tagIngredient");
-        const close = document.createElement( 'i' );
-        close.setAttribute("class", "fa fa-times-circle"); //-----------ADDING PNG IMAGE INSTEAD OF ICON "CLOSE.PNG"
+        let idName = "tagIngredient " + ingredientsTagInput.value.toLowerCase();
+        pTag.setAttribute("id", idName);
+        const close = document.createElement( 'img' );
+        close.setAttribute("src", "./assets/images/close.png");
+        close.addEventListener("click", function() {
+            closeTag(idName);
+          });
         pTag.textContent = ingredientsTagInput.value.toLowerCase();
         pTag.appendChild(close);
         const mainTag = document.querySelector(".mainTag");
@@ -339,8 +348,13 @@ document.getElementById("applianceInput").addEventListener("focusout", function(
     if(applianceTagInput.value.length >= 3) {
         const pTag = document.createElement( 'p' );
         pTag.setAttribute("class", "tagAppliance");
-        const close = document.createElement( 'i' );
-        close.setAttribute("class", "fa fa-times-circle");
+        let idName = "tagAppliance " + applianceTagInput.value.toLowerCase();
+        pTag.setAttribute("id", idName);
+        const close = document.createElement( 'img' );
+        close.setAttribute("src", "./assets/images/close.png");
+        close.addEventListener("click", function() {
+            closeTag(idName);
+          });
         pTag.textContent = applianceTagInput.value.toLowerCase();
         pTag.appendChild(close);
         const mainTag = document.querySelector(".mainTag");
@@ -353,8 +367,13 @@ document.getElementById("ustensilsInput").addEventListener("focusout", function(
     if(ustensilsTagInput.value.length >= 3) {
         const pTag = document.createElement( 'p' );
         pTag.setAttribute("class", "tagUstensils");
-        const close = document.createElement( 'i' );
-        close.setAttribute("class", "fa fa-times-circle");
+        let idName = "tagUstensils " + ustensilsTagInput.value.toLowerCase();
+        pTag.setAttribute("id", idName);
+        const close = document.createElement( 'img' );
+        close.setAttribute("src", "./assets/images/close.png");
+        close.addEventListener("click", function() {
+            closeTag(idName);
+          });
         pTag.textContent = ustensilsTagInput.value.toLowerCase();
         pTag.appendChild(close);
         const mainTag = document.querySelector(".mainTag");
