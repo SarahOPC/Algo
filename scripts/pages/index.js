@@ -281,6 +281,16 @@ function removeAll(datalist) {
     }
 }
 
+function displayError() {
+    let divError = document.createElement( 'div' );
+    divError.setAttribute("class", "divError");
+    let pError = document.createElement( 'p' );
+    pError.textContent = "Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
+    divError.appendChild(pError);
+    const recipeSection = document.querySelector(".recipeSection");
+    recipeSection.appendChild(divError);
+}
+
 function displayNewData() {
     let inputSearch = retrieveInputSearch();
     let ingredientsTagInput = document.getElementById("ingredientsInput");
@@ -291,6 +301,9 @@ function displayNewData() {
         let childElement = document.querySelector(".container.d-flex.flex-wrap.gap-5.justify-content-between");
         container.removeChild(childElement);
         const recipe = lookInRecipes();
+        if(recipe.length == 0) {
+            displayError();
+        }
         const recipeSection = document.querySelector(".recipeSection");
         const recipeModel = recipesFactory(recipe);
         const recipeDOM = recipeModel.createDOM();
