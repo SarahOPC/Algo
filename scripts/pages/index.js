@@ -289,6 +289,7 @@ function displayError() {
     divError.appendChild(pError);
     const recipeSection = document.querySelector(".recipeSection");
     recipeSection.appendChild(divError);
+    setTimeout(function() {divError.remove();}, 7000);
 }
 
 //----------------------------DisplayTags----------------------------//
@@ -466,6 +467,10 @@ function displayCrossedData() {
     let newRecipeArrayAppliance = getRecipesFromApplianceTag(newRecipeArrayIngredient, inputApplianceValue);
     let newRecipeArrayUstensils = getRecipesFromUstensilsTag(newRecipeArrayAppliance, inputUstensilsValue);
     let newRecipeArraySearch = getRecipesFromInputSearch(newRecipeArrayUstensils, inputSearch);
+
+    if(newRecipeArraySearch == "") {
+        displayError();
+    } 
 
     showNewDOM(newRecipeArraySearch);
 }
