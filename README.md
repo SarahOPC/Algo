@@ -10,6 +10,8 @@ Possibilité de recherche et de filtres
 
 Comment installer et exécuter le projet
 
+Simplement ouvrir index.html
+
 ---
 
 Project title
@@ -23,3 +25,5 @@ Ability to search and filters
 50 recipes to choose from now
 
 How to install and run the project
+
+Just open index.html
