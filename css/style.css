@@ -80,12 +80,6 @@
     font-size: 110%;
 }
 
-.col-2.rounded-2.ingredients.d-flex.align-items-baseline,
-.col-2.rounded-2.appliance.d-flex.align-items-baseline,
-.col-2.rounded-2.ustensils.d-flex.align-items-baseline {
-    box-sizing: content-box;
-}
-
 ::placeholder {
     color: #FFFFFF;
     opacity: 1;
@@ -124,4 +118,49 @@
     text-align: center;
     font-weight: 600;
     width: fit-content;
+}
+
+.ingredientsDiv, .applianceDiv, .ustensilsDiv {
+    width: 7em;
+    height: 3em;
+    transition: width 0.3s ease, height 0.3 ease;
+}
+
+.col-2.rounded-2.appliance.d-flex.align-items-baseline,
+.col-2.rounded-2.ingredients.d-flex.align-items-baseline,
+.col-2.rounded-2.ustensils.d-flex.align-items-baseline {
+    margin-right: 2em;
+    box-sizing: content-box;
+    margin-bottom: -0.5em;
+    flex: 0 0 auto; /* will maintain the size of the div */
+    flex-wrap: nowrap;
+}
+
+#ingredients, #appliance, #ustensils {
+    border-radius: 0em 0.7em 0.7em 0.7em;
+    width: 45em;
+}
+
+#ustensils {
+    z-index: 2;
+}
+
+.ingredientsContainer, .applianceContainer, .ustensilsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.right {
+    transform: translateX(200%);
+}
+
+.left {
+    transform: translateX(0%);
+}
+.rightUstensil {
+    transform: translateX(100%);
+}
+
+.leftUstensil {
+    transform: translateX(0%);
 }
